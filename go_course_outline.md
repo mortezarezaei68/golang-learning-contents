@@ -109,3 +109,18 @@
 - Observer Pattern — Event-Driven Communication with Channels
 - State Pattern — Managing Object Behavior Based on Internal State
 - Pipeline Pattern — Composing Concurrent Stages for Data Processing
+## Document Links
+https://drive.google.com/file/d/1aSpEeLmfsTZc4PA1JT4wRs-wv2Y-_21T/view?usp=sharing
+
+## Practices
+
+### Session 1:
+
+- Is there any destructor in Golang
+- How can I override value type in this method if I change it to the value type
+
+func Test(value int) {
+    println("test")
+    value = 20
+}
+    
