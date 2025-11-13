@@ -119,8 +119,10 @@ https://drive.google.com/file/d/1aSpEeLmfsTZc4PA1JT4wRs-wv2Y-_21T/view?usp=shari
 - Is there any destructor in Golang
 - How can I override value type in this method if I change it to the value type
 
+```go
 func Test(value int) {
     println("test")
     value = 20
 }
+```
     
