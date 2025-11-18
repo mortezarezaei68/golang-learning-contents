@@ -101,3 +101,5 @@ Maximum achievable stability score
 - Shelf weight **must not exceed** capacity.
 - Products may be placed in **any order**.
 - Only the **maximum score** matters.
+- A heavier product should ideally be placed on a shelf with a larger capacity.
+
