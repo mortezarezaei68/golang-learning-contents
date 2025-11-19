@@ -75,6 +75,6 @@ func sortProductsDesc(products []model.Product) {
 
 func sortLevelsDesc(levels []model.Level) {
 	sort.Slice(levels, func(i, j int) bool {
-		return levels[i].Order > levels[j].Order
+		return levels[i].Capacity > levels[j].Capacity
 	})
 }
