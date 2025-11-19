@@ -26,22 +26,33 @@ func main() {
 	}
 
 	sort.Slice(weights, func(i, j int) bool {
-		return weights[i] > weights[j]
+		return weights[i] < weights[j]
 	})
 
 	var score int64
 
 	for _, w := range weights {
+		bestLevel := -1
+		var bestCap int64 = -1
 
-		for level := l - 1; level >= 0; level-- {
+		for level := 0; level < l; level++ {
 			if capacities[level] >= w {
-				capacities[level] -= w
-				levelIndex := int64(level + 1)
-				score += w * levelIndex
-				break
+				if capacities[level] > bestCap ||
+					(capacities[level] == bestCap && level > bestLevel) {
+					bestCap = capacities[level]
+					bestLevel = level
+				}
 			}
 		}
 
+		if bestLevel == -1 {
+
+			return
+		}
+
+		capacities[bestLevel] -= w
+		levelIndex := int64(bestLevel + 1)
+		score += w * levelIndex
 	}
 
 	fmt.Println(score)
