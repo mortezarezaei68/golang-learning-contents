@@ -146,3 +146,77 @@ func TestPanic() {
 	panic("test")
 }
 ```
+### Session 3
+- why we use wait and close channel in go func?
+```go
+	go func() {
+		wg.Wait()
+	}()
+```
+- what is blocking and deadlock in goroutine and how it would be happened please write it in an example?
+
+- In this method I have implemented fanIn and I want to know why it goes wrong
+
+```go
+func fanIn(ch1, ch2 <-chan int) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		for {
+			select {
+			case v, ok := <-ch1:
+				if !ok {
+					ch1 = nil // disable this case
+					continue
+				}
+				out <- v
+
+			case v, ok := <-ch2:
+				if !ok {
+					ch2 = nil // disable this case
+					continue
+				}
+				out <- v
+			}
+
+			// stop when both are nil → dead channel
+			if ch1 == nil && ch2 == nil {
+				close(out)
+				return
+			}
+		}
+	}()
+
+	return out
+}
+func main() {
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+
+	// sender 1
+	go func() {
+		for i := 0; i < 5; i++ {
+			ch1 <- i
+			time.Sleep(200 * time.Millisecond)
+		}
+		close(ch1)
+	}()
+
+	// sender 2
+	go func() {
+		for i := 100; i < 105; i++ {
+			ch2 <- i
+			time.Sleep(350 * time.Millisecond)
+		}
+		close(ch2)
+	}()
+
+	// merged output
+	out := fanIn(ch1, ch2)
+
+	// consumer
+	for v := range out {
+		fmt.Println("Received:", v)
+	}
+}
+```
