@@ -1,0 +1,5 @@
+Enter N and L:
+Enter weights of products:
+Enter capacities of shelves:
+[{P3 5 2} {P4 4 1} {P1 3 2} {P2 2 1}]
+22
